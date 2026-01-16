@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShelTrify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // Enable dark mode via class
+        theme: {
+          extend: {
+            colors: {
+              'brand-primary': '#00A8A8',
+              'brand-secondary': '#007A7A',
+              // Dark theme colors
+              'dark-bg': '#0D1117',
+              'dark-card': '#161B22',
+              'dark-border': '#30363D',
+              'dark-text-primary': '#C9D1D9',
+              'dark-text-secondary': '#8B949E',
+              // Light theme colors
+              'light-bg': '#F9FAFB',
+              'light-card': '#FFFFFF',
+              'light-border': '#E5E7EB',
+              'light-text-primary': '#1F2937',
+              'light-text-secondary': '#6B7280',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            keyframes: {
+              'new-message-animation': {
+                '0%': { opacity: '0', transform: 'translateY(10px) scale(0.98)' },
+                '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+              },
+              'toast-in-out': {
+                '0%': { transform: 'translateX(100%)', opacity: '0' },
+                '20%': { transform: 'translateX(0)', opacity: '1' },
+                '80%': { transform: 'translateX(0)', opacity: '1' },
+                '100%': { transform: 'translateX(100%)', opacity: '0' },
+              }
+            },
+            animation: {
+              'new-message': 'new-message-animation 0.3s ease-out forwards',
+              'toast': 'toast-in-out 3s ease-in-out forwards',
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.22.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-DdoPc1jm.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DKABXlmy.css">
+</head>
+  <body class="bg-light-bg dark:bg-dark-bg text-light-text-primary dark:text-dark-text-primary bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.1),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
+    <div id="root"></div>
+  </body>
+</html>
