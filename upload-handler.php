@@ -50,11 +50,37 @@ if (!in_array($fileType, ['images', 'videos'])) {
 }
 
 // Check if file was uploaded
-if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+if (!isset($_FILES['file'])) {
     http_response_code(400);
     echo json_encode([
         'success' => false,
-        'message' => 'No file uploaded or upload error: ' . ($_FILES['file']['error'] ?? 'unknown')
+        'message' => 'No file uploaded. Please select a file and try again.'
+    ]);
+    exit();
+}
+
+// Handle upload errors with user-friendly messages
+$uploadError = $_FILES['file']['error'] ?? UPLOAD_ERR_OK;
+if ($uploadError !== UPLOAD_ERR_OK) {
+    $errorMessages = [
+        UPLOAD_ERR_INI_SIZE => 'File is too large. Server limit is ' . ini_get('upload_max_filesize') . '. Please reduce file size or contact admin to increase server limits.',
+        UPLOAD_ERR_FORM_SIZE => 'File exceeds form size limit. Maximum allowed: 20MB.',
+        UPLOAD_ERR_PARTIAL => 'File was only partially uploaded. Please try again.',
+        UPLOAD_ERR_NO_FILE => 'No file was uploaded. Please select a file.',
+        UPLOAD_ERR_NO_TMP_DIR => 'Server configuration error: Missing temporary folder.',
+        UPLOAD_ERR_CANT_WRITE => 'Server error: Failed to write file to disk.',
+        UPLOAD_ERR_EXTENSION => 'File upload was blocked by server extension.',
+    ];
+    
+    $errorMessage = $errorMessages[$uploadError] ?? 'Upload error: ' . $uploadError;
+    
+    http_response_code(400);
+    echo json_encode([
+        'success' => false,
+        'message' => $errorMessage,
+        'error_code' => $uploadError,
+        'server_limit' => ini_get('upload_max_filesize'),
+        'post_limit' => ini_get('post_max_size')
     ]);
     exit();
 }
